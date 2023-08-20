@@ -10,7 +10,6 @@ app.use(express.json());
 // create "middleware"
 app.use(morgan('dev'));
 
-
 app.use('/api/products', productsRouter);
 
 app.listen(PORT, () => {

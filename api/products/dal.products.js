@@ -1,5 +1,18 @@
-import productsDB from '../../data.js';
 import { v4 as uuvid4 } from 'uuid';
+import initProductsData from './utils/products.init.js';
+import fs from 'fs';
+
+//init products data:
+initProductsData();
+//get the data:
+let data = [];
+try {
+    data = fs.readFileSync('data.json', 'utf-8');
+    fetchedData = JSON.parse(content);
+    console.log('Data loaded from file.');
+} catch (error) {
+    console.error('Error loading data:', error.message);
+}
 
 const getAll = async () => {
     return productsDB;
