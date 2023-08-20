@@ -74,8 +74,8 @@ const update = async (productId, newData) => {
 
 const deleteItem = async (productId) => {
     try {
-        await dalProducts.findByIdAndDelete(productId);
-        return { message: 'Product deleted successfully' };
+        const remProduct = await dalProducts.deleteItem(productId);
+        return { message: 'Product deleted successfully', body: remProduct };
     } catch (error) {
         throw new Error('Failed to delete product');
     }

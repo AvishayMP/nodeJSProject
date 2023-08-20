@@ -38,7 +38,7 @@ const update = async (productId, updatedProductData) => {
         };
         return productsDB[index];
     } else {
-        throw new Error('Product not found'); // Product not found
+        throw new Error('Product not found');
     }
 };
 
@@ -48,7 +48,7 @@ const deleteItem = async (productId) => {
         const deletedProduct = productsDB.splice(index, 1)[0];
         return deletedProduct;
     } else {
-        return null; // Product not found
+        throw new Error('Product not found');
     }
 };
 
