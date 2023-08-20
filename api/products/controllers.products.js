@@ -50,7 +50,10 @@ const deleteItem = async (req, res) => {
 
 const updateQuantity = async (req, res) => {
     const productId = req.params.id;
-    const action = req.body.action;
+    const { action } = req.body;
+    if (!action) {
+        return res.status(400).json('Invalid request body. should contain: "action" filed with: "inc" or "dec" string');
+    }
 
     try {
         const product = await servicesProducts.getById(productId);
@@ -58,27 +61,29 @@ const updateQuantity = async (req, res) => {
         if (!product) {
             return res.status(404).json({ message: 'Product not found' });
         }
-
+        if (!product.quantity) {
+            product.quantity = 0;
+        }
         switch (action) {
             case 'inc':
                 product.quantity += 1;
                 break;
             case 'dec':
-                if (product.quantity > 0) {
-                    product.quantity -= 1;
-                } else {
-                    return res.status(400).json({ message: 'Quantity cannot be negative' });
-                }
+                product.quantity -= 1;
                 break;
             default:
-                return res.status(404).json({ message: 'Product not found' });
+                return res.status(404).json({ message: 'invalid request' });
         }
 
-        await product.save();
+        // the validation of positive number will be in the service layer.
+        const updatedProduct = await servicesProducts.update(productId, product);
 
-        res.status(200).json(product);
+        if (updatedProduct) {
+            res.status(200).json(updatedProduct);
+        }
+
     } catch (error) {
-        res.status(500).json({ message: 'Server error' });
+        res.status(500).json({ message: 'Server error' + error.message });
     }
 };
 const controller = { getAll, getById, create, update, deleteItem, updateQuantity };

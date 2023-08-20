@@ -8,7 +8,7 @@ router.get('/:id', controllersProducts.getById);
 router.post('/', controllersProducts.create);
 router.put('/:id', controllersProducts.update);
 router.delete('/:id', controllersProducts.deleteItem);
-router.patch('/:id/quantity', controllersProducts.updateQuantity);
+router.patch('/:id', controllersProducts.updateQuantity);
 
 
 export default router;
