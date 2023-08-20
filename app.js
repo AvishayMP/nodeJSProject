@@ -8,7 +8,7 @@ const PORT = 3000;
 // middleware for json the body of the request.
 app.use(express.json());
 // create "middleware"
-app.use(morgan('combined'));
+app.use(morgan('dev'));
 
 
 app.use('/api/products', productsRouter);

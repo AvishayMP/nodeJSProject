@@ -11,8 +11,20 @@ const getById = async (productId) => {
 };
 
 const create = async (newProductData) => {
-    const newProduct = { ...newProductData, id: uuvid4() };
-    productsDB.push(newProduct);
+    const newProduct = { ...newProductData };
+
+    if (!newProduct.id) {
+        newProduct.id = uuvid4();
+    }
+    if (!newProduct.quantity) {
+        newProduct.quantity = 0;
+    }
+
+    if (productsDB.find(p => p.id == newProduct.id)) {
+        throw new Error('invalid ID --> already exist!');
+    } else {
+        productsDB.push(newProduct);
+    }
     return newProduct;
 };
 

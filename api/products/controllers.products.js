@@ -22,9 +22,9 @@ const getById = async (req, res) => {
 const create = async (req, res) => {
     try {
         const newProduct = await servicesProducts.create(req.body);
-        res.status(201).json(newProduct);
+        res.status(202).json(newProduct);
     } catch (error) {
-        res.status(500).json({ message: 'Server error' });
+        res.status(500).json({ message: 'Server error'+error.message });
     }
 }
 const update = async (req, res) => {
