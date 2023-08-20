@@ -8,10 +8,10 @@ const PORT = 3000;
 // middleware for json the body of the request.
 app.use(express.json());
 // create "middleware"
-const logger = morgan('combined');
+app.use(morgan('combined'));
 
 
-app.use('/api/products', logger, productsRouter);
+app.use('/api/products', productsRouter);
 
 app.listen(PORT, () => {
     console.log('listening in port: ' + PORT);

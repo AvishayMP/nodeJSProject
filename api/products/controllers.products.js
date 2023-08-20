@@ -14,7 +14,7 @@ const getById = async (req, res) => {
 
     try {
         const product = await servicesProducts.getById(productId);
-        res.json(product);
+        res.status(200).json(product);
     } catch (error) {
         res.status(500).json({ message: 'Server error' });
     }
@@ -47,6 +47,40 @@ const deleteItem = async (req, res) => {
         res.status(500).json({ message: 'Server error', body: deletedItem });
     }
 }
-const controller = { getAll, getById, create, update, deleteItem };
+
+const updateQuantity = async (req, res) => {
+    const productId = req.params.id;
+    const action = req.body.action;
+
+    try {
+        const product = await servicesProducts.getById(productId);
+
+        if (!product) {
+            return res.status(404).json({ message: 'Product not found' });
+        }
+
+        switch (action) {
+            case 'inc':
+                product.quantity += 1;
+                break;
+            case 'dec':
+                if (product.quantity > 0) {
+                    product.quantity -= 1;
+                } else {
+                    return res.status(400).json({ message: 'Quantity cannot be negative' });
+                }
+                break;
+            default:
+                return res.status(404).json({ message: 'Product not found' });
+        }
+
+        await product.save();
+
+        res.json(product);
+    } catch (error) {
+        res.status(500).json({ message: 'Server error' });
+    }
+};
+const controller = { getAll, getById, create, update, deleteItem, updateQuantity };
 
 export default controller;
