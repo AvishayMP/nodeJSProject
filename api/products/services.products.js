@@ -1,4 +1,5 @@
 import dalProducts from './dal.products.js';
+
 import Joi from 'joi';
 
 const productSchema = Joi.object({
@@ -13,6 +14,19 @@ const productSchema = Joi.object({
         rate: Joi.number().required(),
         count: Joi.number().required()
     }).required()
+});
+
+const productUpdateSchema = Joi.object({
+    title: Joi.string().optional(),
+    price: Joi.number().optional(),
+    quantity: Joi.number().optional(),
+    description: Joi.string().optional(),
+    category: Joi.string().optional(),
+    image: Joi.string().uri().optional(),
+    rating: Joi.object({
+        rate: Joi.number().optional(),
+        count: Joi.number().optional()
+    }).optional()
 });
 
 const getAll = async () => {
@@ -44,8 +58,14 @@ const create = async (productData) => {
 };
 
 const update = async (productId, newData) => {
+    const { error, value } = productUpdateSchema.validate(newData);
+
+    if (error) {
+        throw new Error('Validation error:' + error.details);
+    }
+
     try {
-        const updatedProduct = await dalProducts.findByIdAndUpdate(productId, newData, { new: true });
+        const updatedProduct = await dalProducts.update(productId, value);
         return updatedProduct;
     } catch (error) {
         throw new Error('Failed to update product');

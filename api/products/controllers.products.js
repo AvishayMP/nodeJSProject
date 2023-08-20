@@ -24,15 +24,15 @@ const create = async (req, res) => {
         const newProduct = await servicesProducts.create(req.body);
         res.status(202).json(newProduct);
     } catch (error) {
-        res.status(500).json({ message: 'Server error'+error.message });
+        res.status(500).json({ message: 'Server error' + error.message });
     }
 }
 const update = async (req, res) => {
     const productId = req.params.id;
 
     try {
-        const updatedProduct = await servicesProducts.update(productId, req.body, { new: true });
-        res.json(updatedProduct);
+        const updatedProduct = await servicesProducts.update(productId, req.body);
+        res.status(200).json(updatedProduct);
     } catch (error) {
         res.status(500).json({ message: 'Server error' });
     }
@@ -76,7 +76,7 @@ const updateQuantity = async (req, res) => {
 
         await product.save();
 
-        res.json(product);
+        res.status(200).json(product);
     } catch (error) {
         res.status(500).json({ message: 'Server error' });
     }

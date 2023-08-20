@@ -31,10 +31,14 @@ const create = async (newProductData) => {
 const update = async (productId, updatedProductData) => {
     const index = productsDB.findIndex((p) => p.id === productId);
     if (index !== -1) {
-        productsDB[index] = { ...productsDB[index], ...updatedProductData };
+        productsDB[index] = {
+            ...productsDB[index],
+            ...updatedProductData,
+            id: productsDB[index].id
+        };
         return productsDB[index];
     } else {
-        return null; // Product not found
+        throw new Error('Product not found'); // Product not found
     }
 };
 
