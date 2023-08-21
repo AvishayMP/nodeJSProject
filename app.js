@@ -1,5 +1,9 @@
 import express from 'express';
 import productsRouter from './api/products/routers.products.js';
+
+import authRoutes from './api/users/routers.users/authRoutes.js';
+import userRoutes from './api/users/routers.users/userRoutes.js';
+
 import morgan from 'morgan';
 
 const app = express();
@@ -11,6 +15,9 @@ app.use(express.json());
 app.use(morgan('dev'));
 
 app.use('/api/products', productsRouter);
+
+app.use('/api/auth', authRoutes); //this is for signing and login.
+app.use('/api/users', userRoutes); //this is for manual the data
 
 app.listen(PORT, () => {
     console.log('listening in port: ' + PORT);

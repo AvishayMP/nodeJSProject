@@ -7,8 +7,8 @@ initProductsData();
 //get the data:
 let data = [];
 try {
-    data = fs.readFileSync('data.json', 'utf-8');
-    fetchedData = JSON.parse(content);
+    const content = fs.readFileSync('C:/Users/Kodecode2023/Desktop/kodecode/nodeJS/project/data/products.json', 'utf-8');
+    data = JSON.parse(content);
     console.log('Data loaded from file.');
 } catch (error) {
     console.error('Error loading data:', error.message);
