@@ -5,10 +5,10 @@ import fs from 'fs';
 //init products data:
 initProductsData();
 //get the data:
-let data = [];
+let productsDB = [];
 try {
     const content = fs.readFileSync('C:/Users/Kodecode2023/Desktop/kodecode/nodeJS/project/data/products.json', 'utf-8');
-    data = JSON.parse(content);
+    productsDB = JSON.parse(content);
     console.log('Data loaded from file.');
 } catch (error) {
     console.error('Error loading data:', error.message);
