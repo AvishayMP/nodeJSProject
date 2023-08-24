@@ -1,7 +1,8 @@
 import fs from 'fs';
 import path from 'path';
 
-const USERS_JSON_PATH = path.join('C:/Users/Kodecode2023/Desktop/kodecode/nodeJS/project/data/users.json');
+const dirName = import.meta.url;
+const USERS_JSON_PATH = path.join(dirName + '../../../data/users.json');
 
 const getUsersFromFile = async () => {
     try {
@@ -17,7 +18,7 @@ const saveUsersToFile = async (users) => {
 }
 
 // exported methods:
-const getAllUsers = async (usrId) => {
+const getAllUsers = async () => {
     const users = await getUsersFromFile();
     return users;
 }
