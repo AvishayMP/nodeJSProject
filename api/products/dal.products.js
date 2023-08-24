@@ -8,7 +8,7 @@ initProductsData();
 //get the data:
 let productsDB = [];
 try {
-    const dirname = path.join(import.meta.url, '../../../data/products.json');
+    const dirname = path.join('data/products.json');
     console.log(dirname);
     const content = fs.readFileSync(dirname, 'utf-8');
     productsDB = JSON.parse(content);
