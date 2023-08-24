@@ -1,6 +1,5 @@
 import axios from 'axios';
 import fs from 'fs';
-import path from 'path';
 
 const BASEURL = 'https://fakestoreapi.com/products';
 
@@ -22,8 +21,7 @@ const fetchProducts = async () => {
 };
 
 const saveProductsToFile = async (products) => {
-    const filePath = path.join('data/products.json');
-    console.log('init -> ' + filePath);
+    const filePath ='data/products.json';
     const content = JSON.stringify(products, null, 2);
     if (!fs.existsSync(filePath)) {
         fs.writeFileSync(filePath, content, 'utf8');

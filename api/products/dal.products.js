@@ -1,15 +1,13 @@
 import { v4 as uuvid4 } from 'uuid';
 import initProductsData from './utils/products.init.js';
 import fs from 'fs';
-import path from 'path';
 
 //init products data:
 initProductsData();
 //get the data:
 let productsDB = [];
 try {
-    const dirname = path.join('data/products.json');
-    console.log(dirname);
+    const dirname = 'data/products.json';
     const content = fs.readFileSync(dirname, 'utf-8');
     productsDB = JSON.parse(content);
     console.log('Data loaded from file.');

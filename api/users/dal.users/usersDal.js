@@ -1,8 +1,6 @@
 import fs from 'fs';
-import path from 'path';
 
-const dirName = import.meta.url;
-const USERS_JSON_PATH = path.join(dirName + '../../../data/users.json');
+const USERS_JSON_PATH = 'data/users.json';
 
 const getUsersFromFile = async () => {
     try {
