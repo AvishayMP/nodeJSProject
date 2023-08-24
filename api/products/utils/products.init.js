@@ -22,7 +22,8 @@ const fetchProducts = async () => {
 };
 
 const saveProductsToFile = async (products) => {
-    const filePath = path.join(import.meta.url + '../../../data/products.json');
+    const filePath = path.join(import.meta.url, '../../../../data/products.json');
+    console.log('init -> '+filePath);
     const content = JSON.stringify(products, null, 2);
     if (!fs.existsSync(filePath)) {
         fs.writeFileSync(filePath, content, 'utf8');
