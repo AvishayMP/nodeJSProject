@@ -22,7 +22,7 @@ const fetchProducts = async () => {
 };
 
 const saveProductsToFile = async (products) => {
-    const filePath = path.join('C:/Users/Kodecode2023/Desktop/kodecode/nodeJS/project/data/products.json');
+    const filePath = path.join(import.meta.url + '../../../data/products.json');
     const content = JSON.stringify(products, null, 2);
     if (!fs.existsSync(filePath)) {
         fs.writeFileSync(filePath, content, 'utf8');
